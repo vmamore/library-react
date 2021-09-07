@@ -1,20 +1,26 @@
-import { Pagination } from "react-bootstrap";
+import { Pagination, PageItem } from "react-bootstrap";
 
-export function BookPagination() {
-  let active = 2;
+export function BookPagination({ totalPages, currentPage, onPageClick }) {
   let items = [];
-  for (let number = 1; number <= 5; number++) {
+  
+  items.push(
+    <PageItem key={1} active={1 === currentPage} onClick={() => onPageClick(1)}>
+      {1}
+    </PageItem>
+  );
+
+  for (let number = 2; number <= totalPages; number++) {
     items.push(
-      <Pagination.Item key={number} active={number === active}>
+      <PageItem key={number} active={number === currentPage} onClick={() => onPageClick(number)}>
         {number}
-      </Pagination.Item>
+      </PageItem>
     );
   }
 
   return (
     <Pagination className="justify-content-md-center mt-2">
       <Pagination.Prev />
-      {items}
+        {items}
       <Pagination.Next />
     </Pagination>
   );
