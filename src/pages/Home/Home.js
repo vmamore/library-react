@@ -13,13 +13,19 @@ export function Home() {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    getAllBooks(currentPage);
-    console.log(currentPage)
-  }, [bookTitle, currentPage]);
+    const delayDebounceFn = setTimeout(() => {
+      getAllBooks(1, bookTitle)
+    }, 1500)
 
-  async function getAllBooks(page) {
-    console.log("entered");
-    fetchAllBooks(page).then((b) => {
+    return () => clearTimeout(delayDebounceFn)
+  }, [bookTitle])
+
+  useEffect(() => {
+    getAllBooks(currentPage);
+  }, [currentPage]);
+
+  async function getAllBooks(page = 1, title = '') {
+    fetchAllBooks(page, title).then((b) => {
       setbooksPagination({
         books: b.data.books,
         totalPages: b.data.totalPages,

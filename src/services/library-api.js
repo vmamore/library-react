@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export async function fetchAllBooks(page) {
+export async function fetchAllBooks(page, title) {
   if(!page) page = 1
-  const url = `${process.env.REACT_APP_LIBRARY_API}/rentals/books/all?page=${page}`;
+  const url = `${process.env.REACT_APP_LIBRARY_API}/rentals/books/all?page=${page}&title=${title}`;
   return await axios.get(url);
 }
 
