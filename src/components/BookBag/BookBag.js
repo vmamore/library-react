@@ -42,12 +42,12 @@ export function BookBag({ books, onClearBag }) {
           <hr />
           <Row>
             <Col md={4}>
-              <Button variant="outline-success" onClick={goToCheckout}>
+              <Button variant="outline-success" onClick={() => { goToCheckout() }}>
                 Rent books
               </Button>
             </Col>
             <Col md={{ span: 4, offset: 4 }}>
-              <Button variant="outline-danger" onClick={onClearBag}>
+              <Button variant="outline-danger" onClick={() => { handleClose(); onClearBag(); }}>
                 Clear bag
               </Button>
             </Col>
