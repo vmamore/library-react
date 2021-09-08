@@ -1,6 +1,15 @@
-import { Button, Offcanvas, ListGroup, Image, Row, Col, Badge } from "react-bootstrap";
+import {
+  Button,
+  Offcanvas,
+  ListGroup,
+  Image,
+  Row,
+  Col,
+  Badge,
+} from "react-bootstrap";
 import { useState } from "react";
 import { useHistory } from "react-router";
+import { BsBagFill } from "react-icons/bs";
 
 export function BookBag({ books, onClearBag }) {
   let history = useHistory();
@@ -16,8 +25,8 @@ export function BookBag({ books, onClearBag }) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow} size="sm">
-        My Bag ({books.length})
+      <Button variant="primary" onClick={handleShow}>
+        <BsBagFill /> ({books.length})
       </Button>
       <Offcanvas show={show} onHide={handleClose} placement="end">
         <Offcanvas.Header closeButton>
@@ -28,7 +37,7 @@ export function BookBag({ books, onClearBag }) {
             {books.map((book, index) => (
               <>
                 <ListGroup.Item key={book.id}>
-                  <Badge bg="dark">{index+1}</Badge>
+                  <Badge bg="dark">{index + 1}</Badge>
                   <Image
                     style={{ height: "55px", width: "55px" }}
                     src={book.photoUrl}
@@ -42,12 +51,23 @@ export function BookBag({ books, onClearBag }) {
           <hr />
           <Row>
             <Col md={4}>
-              <Button variant="outline-success" onClick={() => { goToCheckout() }}>
+              <Button
+                variant="outline-success"
+                onClick={() => {
+                  goToCheckout();
+                }}
+              >
                 Rent books
               </Button>
             </Col>
             <Col md={{ span: 4, offset: 4 }}>
-              <Button variant="outline-danger" onClick={() => { handleClose(); onClearBag(); }}>
+              <Button
+                variant="outline-danger"
+                onClick={() => {
+                  handleClose();
+                  onClearBag();
+                }}
+              >
                 Clear bag
               </Button>
             </Col>

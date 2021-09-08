@@ -7,6 +7,7 @@ import {
   Container,
 } from "react-bootstrap";
 import { BookBag } from "../BookBag/BookBag";
+import { BsSearch } from "react-icons/bs";
 
 export function BookSearch({
   onHandleClick,
@@ -32,7 +33,7 @@ export function BookSearch({
               onChange={(event) => onUpdateBookTitle(event.target.value)}
             />
             <Button variant="outline-primary" onClick={() => onHandleClick()}>
-              Find
+              <BsSearch />
             </Button>
           </InputGroup>
         </Nav>
