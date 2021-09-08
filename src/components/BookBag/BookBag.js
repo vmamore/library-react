@@ -1,4 +1,4 @@
-import { Button, Offcanvas, ListGroup } from "react-bootstrap";
+import { Button, Offcanvas, ListGroup, Image, Row, Col, Badge } from "react-bootstrap";
 import { useState } from "react";
 import { useHistory } from "react-router";
 
@@ -9,11 +9,10 @@ export function BookBag({ books, onClearBag }) {
   const handleShow = () => setShow(true);
 
   function goToCheckout() {
-    history.push("/checkout")
+    history.push("/checkout");
   }
 
-  if (!books)
-    return <p>Empty Bag</p>
+  if (!books) return <p>Empty Bag</p>;
 
   return (
     <>
@@ -22,16 +21,37 @@ export function BookBag({ books, onClearBag }) {
       </Button>
       <Offcanvas show={show} onHide={handleClose} placement="end">
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Your books</Offcanvas.Title>
+          <Offcanvas.Title>Bag</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <ListGroup variant="flush">
-            {books.map(book => 
-              <ListGroup.Item key={book.id}>{book.title} - {book.author}</ListGroup.Item>
-            )}
+          <ListGroup variant="flush" class="mb-3">
+            {books.map((book, index) => (
+              <>
+                <ListGroup.Item key={book.id}>
+                  <Badge bg="dark">{index+1}</Badge>
+                  <Image
+                    style={{ height: "55px", width: "55px" }}
+                    src={book.photoUrl}
+                    rounded
+                  />{" "}
+                  {book.title} - {book.author}
+                </ListGroup.Item>
+              </>
+            ))}
           </ListGroup>
-          <Button variant="outline-success" onClick={goToCheckout}>Rent books</Button>
-          <Button variant="outline-danger" onClick={onClearBag}>Clear bag</Button>
+          <hr />
+          <Row>
+            <Col md={4}>
+              <Button variant="outline-success" onClick={goToCheckout}>
+                Rent books
+              </Button>
+            </Col>
+            <Col md={{ span: 4, offset: 4 }}>
+              <Button variant="outline-danger" onClick={onClearBag}>
+                Clear bag
+              </Button>
+            </Col>
+          </Row>
         </Offcanvas.Body>
       </Offcanvas>
     </>

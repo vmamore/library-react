@@ -7,7 +7,7 @@ function App() {
   return (
     <Container className="p-3">
       <BrowserRouter>
-        <Route path="/home" exact component={Home} />
+        <Route path="/" exact component={Home} />
         <Route path="/checkout" exact component={Checkout} />
       </BrowserRouter>
     </Container>

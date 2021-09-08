@@ -1,48 +1,82 @@
-import { Row } from "react-bootstrap";
+import { Row, Spinner } from "react-bootstrap";
 import { BookSearch } from "../../components/BookSearch/BookSearch";
 import { BookCatalog } from "../../components/BookCatalog/BookCatalog";
 import { BookPagination } from "../../components/BookPagination/BookPagination";
 import { useEffect, useState } from "react";
 import { fetchAllBooks } from "../../services/library-api";
-import { useLocalStorageState } from '../../utils';
+import { useLocalStorageState } from "../../utils";
 
 export function Home() {
-  const [bookBag, setBookBag] = useLocalStorageState('book-bag', [])
-  const [bookTitle, setBookTitle] = useState(null);
-  const [booksPagination, setbooksPagination] = useState({});
+  const [bookBag, setBookBag] = useLocalStorageState("book-bag", []);
+  const [bookTitle, setBookTitle] = useState("");
+  const [booksPagination, setbooksPagination] = useState({
+    state: "idle",
+    books: [],
+    totalPages: 0,
+    totalCount: 0,
+  });
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      getAllBooks(1, bookTitle)
-    }, 1500)
+      getAllBooks(1, bookTitle);
+    }, 1500);
 
-    return () => clearTimeout(delayDebounceFn)
-  }, [bookTitle])
+    return () => clearTimeout(delayDebounceFn);
+  }, [bookTitle]);
 
   useEffect(() => {
     getAllBooks(currentPage);
   }, [currentPage]);
 
-  async function getAllBooks(page = 1, title = '') {
+  async function getAllBooks(page = 1, title = "") {
     fetchAllBooks(page, title).then((b) => {
       setbooksPagination({
+        state: "resolved",
         books: b.data.books,
         totalPages: b.data.totalPages,
-        totalCount: b.data.totalCount
-      })
+        totalCount: b.data.totalCount,
+      });
     });
   }
 
   function addBookToBag(book) {
-    if (bookBag && bookBag.some(b => b.id === book.id)) return;
-    let copyBookBag = [...bookBag]
-    copyBookBag.push(book)
-    setBookBag(copyBookBag)
+    if (bookBag && bookBag.some((b) => b.id === book.id)) return;
+    let copyBookBag = [...bookBag];
+    copyBookBag.push(book);
+    setBookBag(copyBookBag);
   }
 
   function clearBag() {
-    setBookBag([])
+    setBookBag([]);
+  }
+
+  if (booksPagination.state === "resolved") {
+    return (
+      <>
+        <Row className="justify-content-md-center">
+          <BookSearch
+            onHandleClick={getAllBooks}
+            onUpdateBookTitle={setBookTitle}
+            bookBag={bookBag}
+            onClearBag={clearBag}
+          />
+        </Row>
+        <Row xs={1} md={5} className="g-4">
+          <BookCatalog
+            books={booksPagination.books}
+            onHandleAddToBag={addBookToBag}
+          />
+        </Row>
+        <Row>
+          <BookPagination
+            totalPages={booksPagination.totalPages}
+            currentPage={currentPage}
+            onPageClick={setCurrentPage}
+          />
+        </Row>
+      </>
+    );
   }
 
   return (
@@ -55,12 +89,9 @@ export function Home() {
           onClearBag={clearBag}
         />
       </Row>
-      <Row xs={1} md={5} className="g-4">
-        <BookCatalog books={booksPagination.books} onHandleAddToBag={addBookToBag} />
-      </Row>
-      <Row>
-        <BookPagination totalPages={booksPagination.totalPages} currentPage={currentPage} onPageClick={setCurrentPage} />
-      </Row>
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
     </>
   );
 }
