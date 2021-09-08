@@ -66,6 +66,7 @@ export function Home() {
           <BookCatalog
             books={booksPagination.books}
             onHandleAddToBag={addBookToBag}
+            booksBag={bookBag}
           />
         </Row>
         <Row>
