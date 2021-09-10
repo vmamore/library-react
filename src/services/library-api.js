@@ -17,3 +17,8 @@ export async function createBookRental(books) {
 
   return await axios.post(url, payload);
 }
+
+export async function fetchAllRentsFromLocator(locatorId) {
+  const url = `${process.env.REACT_APP_LIBRARY_API}/rentals/${locatorId}`;
+  return await axios.get(url);
+}
