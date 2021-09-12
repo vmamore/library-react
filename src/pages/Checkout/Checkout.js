@@ -6,7 +6,7 @@ import { BsPlus, BsCheck } from "react-icons/bs";
 
 export function Checkout() {
   const history = useHistory();
-  const [bookBag, setBookBag] = useLocalStorageState("book-bag");
+  const [bookBag] = useLocalStorageState("book-bag");
 
   function goToHome() {
     history.push("/");

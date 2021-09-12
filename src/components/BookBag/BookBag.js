@@ -12,7 +12,7 @@ import { useHistory } from "react-router";
 import { BsBagFill } from "react-icons/bs";
 
 export function BookBag({ books, onClearBag }) {
-  let history = useHistory();
+  const history = useHistory();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
