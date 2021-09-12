@@ -7,7 +7,8 @@ import {
   Container,
 } from "react-bootstrap";
 import { BookBag } from "../BookBag/BookBag";
-import { BsSearch } from "react-icons/bs";
+import { BsSearch, BsCollection } from "react-icons/bs";
+import { useHistory } from "react-router";
 
 export function BookSearch({
   onHandleClick,
@@ -15,6 +16,10 @@ export function BookSearch({
   bookBag,
   onClearBag,
 }) {
+  const history = useHistory();
+  function goToMyRents() {
+    history.push("/my-rents");
+  }
   return (
     <Navbar
       collapseOnSelect
@@ -38,6 +43,15 @@ export function BookSearch({
           </InputGroup>
         </Nav>
         <Nav>
+          <Button
+            variant="outline-success"
+            style={{ marginRight: "15px" }}
+            onClick={() => {
+              goToMyRents();
+            }}
+          >
+            <BsCollection /> My Rents
+          </Button>
           <BookBag books={bookBag} onClearBag={onClearBag} />
         </Nav>
       </Container>
