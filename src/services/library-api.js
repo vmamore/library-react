@@ -3,7 +3,11 @@ import axios from "axios";
 export async function fetchAllBooks(page, title) {
   if(!page) page = 1
   const url = `${process.env.REACT_APP_LIBRARY_API}/rentals/books/all?page=${page}&title=${title}`;
-  return await axios.get(url);
+  return await axios.get(url, {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    }
+  });
 }
 
 export async function createBookRental(books) {
@@ -20,5 +24,9 @@ export async function createBookRental(books) {
 
 export async function fetchAllRentsFromLocator(locatorId) {
   const url = `${process.env.REACT_APP_LIBRARY_API}/rentals/${locatorId}`;
-  return await axios.get(url);
+  return await axios.get(url, {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    }
+  });
 }
