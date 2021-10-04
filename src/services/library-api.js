@@ -1,4 +1,5 @@
 import axios from "axios";
+import keycloack from "../keycloak"
 
 export async function fetchAllBooks(page, title) {
   if(!page) page = 1
@@ -6,6 +7,7 @@ export async function fetchAllBooks(page, title) {
   return await axios.get(url, {
     headers: {
       'Access-Control-Allow-Origin': '*',
+      'Authorization': 'Bearer ' + keycloack.token
     }
   });
 }

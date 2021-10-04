@@ -5,8 +5,10 @@ import { BookPagination } from "../../components/BookPagination/BookPagination";
 import { useEffect, useState } from "react";
 import { fetchAllBooks } from "../../services/library-api";
 import { useLocalStorageState } from "../../utils";
+import { useKeycloak } from "@react-keycloak/web";
 
 export function Home() {
+  const { keycloak, initialized } = useKeycloak();
   const [bookBag, setBookBag] = useLocalStorageState("book-bag", []);
   const [bookTitle, setBookTitle] = useState("");
   const [booksPagination, setbooksPagination] = useState({
@@ -16,7 +18,6 @@ export function Home() {
     totalCount: 0,
   });
   const [currentPage, setCurrentPage] = useState(1);
-
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       getAllBooks(1, bookTitle);
@@ -49,6 +50,16 @@ export function Home() {
 
   function clearBag() {
     setBookBag([]);
+  }
+
+  if (!keycloak.authenticated) {
+    return (
+      <>
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </>
+    );
   }
 
   if (booksPagination.state === "resolved") {

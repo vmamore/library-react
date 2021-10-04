@@ -2,6 +2,6 @@
     "realm": "library",
     "auth-server-url": "http://localhost:8080/auth",
     "ssl-required": "external",
-    "resource": "library-react",
+    "resource": "library-api",
     "public-client": true
   }
