@@ -21,7 +21,7 @@ export function BookBag({ books, onClearBag }) {
     history.push("/checkout");
   }
 
-  if (!books) return <p>Empty Bag</p>;
+  if (!books || books.length === 0) return <p>Empty Bag</p>;
 
   return (
     <>
