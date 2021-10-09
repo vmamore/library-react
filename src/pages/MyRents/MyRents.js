@@ -26,7 +26,7 @@ export function MyRents() {
   }, []);
 
   async function getAllRentalsFromLocator() {
-    fetchAllRentsFromLocator("3e8eefd3-5f27-46f0-9381-7d1e1a80d2a1").then(
+    fetchAllRentsFromLocator().then(
       (b) => {
         setBookRentals({
           state: "resolved",
@@ -58,9 +58,6 @@ export function MyRents() {
             </Badge>
             <Badge style={{ marginRight: "35px" }} pill bg="warning">
               Day to Return: {convertDate(bookRentals.data.dayToReturn)}
-            </Badge>
-            <Badge style={{ marginRight: "35px" }} pill bg="info">
-              Librarian: {bookRentals.data.librarianName}
             </Badge>
           </Accordion.Header>
           <Accordion.Body>
