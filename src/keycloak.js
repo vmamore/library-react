@@ -10,7 +10,7 @@ const initOptions = {
 const keycloak = Keycloak({
   url: 'http://localhost:8080/auth',
   realm: 'library',
-  clientId: 'library-react'
+  clientId: 'library-api'
 });
 
 const KeycloackService = {

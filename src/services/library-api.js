@@ -14,21 +14,23 @@ export async function fetchAllBooks(page, title) {
 
 export async function createBookRental(books) {
   const url = `${process.env.REACT_APP_LIBRARY_API}/rentals`;
-
+  const profile = await KeycloakService.keycloak.loadUserProfile()
   const payload = {
     booksId: books.map((book) => book.id),
-    librarianId: "ef082d2c-f03a-46b5-9c17-7e4b91b6493e",
-    locatorId: "3e8eefd3-5f27-46f0-9381-7d1e1a80d2a1",
+    locatorId: profile.attributes.library_id[0]
   };
 
   return await axios.post(url, payload);
 }
 
-export async function fetchAllRentsFromLocator(locatorId) {
+export async function fetchAllRentsFromLocator() {
+  const profile = await KeycloakService.keycloak.loadUserProfile()
+  const locatorId = profile.attributes.library_id[0]
   const url = `${process.env.REACT_APP_LIBRARY_API}/rentals/${locatorId}`;
   return await axios.get(url, {
     headers: {
       'Access-Control-Allow-Origin': '*',
+      'Authorization': 'Bearer ' + KeycloakService.keycloak.token
     }
   });
 }
