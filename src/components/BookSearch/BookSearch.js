@@ -9,6 +9,7 @@ import {
 import { BookBag } from "../BookBag/BookBag";
 import { BsSearch, BsCollection } from "react-icons/bs";
 import { useHistory } from "react-router";
+import AuthorizedFunction from "../../utils/AuthorizedFunction";
 
 export function BookSearch({
   onHandleClick,
@@ -42,18 +43,20 @@ export function BookSearch({
             </Button>
           </InputGroup>
         </Nav>
-        <Nav>
-          <Button
-            variant="outline-success"
-            style={{ marginRight: "15px" }}
-            onClick={() => {
-              goToMyRents();
-            }}
-          >
-            <BsCollection /> My Rents
-          </Button>
-          <BookBag books={bookBag} onClearBag={onClearBag} />
-        </Nav>
+        {AuthorizedFunction(['locator']) && (
+          <Nav>
+            <Button
+              variant="outline-success"
+              style={{ marginRight: "15px" }}
+              onClick={() => {
+                goToMyRents();
+              }}
+            >
+              <BsCollection /> My Rents
+            </Button>
+            <BookBag books={bookBag} onClearBag={onClearBag} />
+          </Nav>
+        )}
       </Container>
     </Navbar>
   );
