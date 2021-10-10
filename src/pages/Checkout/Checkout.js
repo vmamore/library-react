@@ -1,4 +1,4 @@
-import { useLocalStorageState } from "../../utils";
+import { useLocalStorageState } from "../../utils/LocalStorageHook";
 import { Button, ListGroup, Badge, Image, Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { createBookRental } from "../../services/library-api";

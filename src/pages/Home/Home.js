@@ -4,7 +4,7 @@ import { BookCatalog } from "../../components/BookCatalog/BookCatalog";
 import { BookPagination } from "../../components/BookPagination/BookPagination";
 import { useEffect, useState } from "react";
 import { fetchAllBooks } from "../../services/library-api";
-import { useLocalStorageState } from "../../utils";
+import { useLocalStorageState } from "../../utils/LocalStorageHook";
 import { useKeycloak } from "@react-keycloak/web";
 
 export function Home() {
