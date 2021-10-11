@@ -18,9 +18,15 @@ export function BookSearch({
   onClearBag,
 }) {
   const history = useHistory();
+
   function goToMyRents() {
     history.push("/my-rents");
   }
+
+  function goToAllRentals() {
+    history.push("/all-rentals");
+  }
+
   return (
     <Navbar
       collapseOnSelect
@@ -55,6 +61,19 @@ export function BookSearch({
               <BsCollection /> My Rents
             </Button>
             <BookBag books={bookBag} onClearBag={onClearBag} />
+          </Nav>
+        )}
+        {AuthorizedFunction(['librarian']) && (
+          <Nav>
+            <Button
+              variant="outline-success"
+              style={{ marginRight: "15px" }}
+              onClick={() => {
+                goToAllRentals();
+              }}
+            >
+              <BsCollection /> See All Rentals
+            </Button>
           </Nav>
         )}
       </Container>

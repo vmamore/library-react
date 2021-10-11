@@ -25,11 +25,36 @@ export async function createBookRental(books) {
 
 export async function fetchAllRentsFromLocator() {
   const profile = await KeycloakService.keycloak.loadUserProfile()
-  console.log(profile)
-  console.log(KeycloakService.keycloak.realmAccess)
   const locatorId = profile.attributes.library_id[0]
   const url = `${process.env.REACT_APP_LIBRARY_API}/rentals/${locatorId}`;
   return await axios.get(url, {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': 'Bearer ' + KeycloakService.keycloak.token
+    }
+  });
+}
+
+export async function fetchAllRents() {
+  const url = `${process.env.REACT_APP_LIBRARY_API}/rentals`;
+  return await axios.get(url, {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': 'Bearer ' + KeycloakService.keycloak.token
+    }
+  });
+}
+
+export async function returnBookRental(bookRentalId, rentalStatus = "OK") {
+  const url = `${process.env.REACT_APP_LIBRARY_API}/rentals/${bookRentalId}/return`;
+  const profile = await KeycloakService.keycloak.loadUserProfile()
+  const payload = {
+    rentalStatus,
+    librarianId: profile.attributes.library_id[0],
+    bookRentalId
+  };
+
+  return await axios.patch(url, payload, {
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Authorization': 'Bearer ' + KeycloakService.keycloak.token
