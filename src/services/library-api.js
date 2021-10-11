@@ -61,3 +61,17 @@ export async function returnBookRental(bookRentalId, rentalStatus = "OK") {
     }
   });
 }
+
+export async function createBook(book) {
+  const url = `${process.env.REACT_APP_LIBRARY_API}/inventory/books`;
+  const payload = {
+    ...book
+  };
+
+  return await axios.post(url, payload, {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': 'Bearer ' + KeycloakService.keycloak.token
+    }
+  });
+}
