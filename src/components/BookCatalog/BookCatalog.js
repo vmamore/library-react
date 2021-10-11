@@ -1,4 +1,5 @@
 import { Col, Card, Button } from "react-bootstrap";
+import AuthorizedFunction from "../../utils/AuthorizedFunction";
 
 const BookStatus = {
   FREE: 1,
@@ -45,7 +46,11 @@ function BookCatalogCard({ book, onHandleAddToBag, isOnBagAlready, isRented }) {
       <Card.Body>
         <Card.Title>{book.title}</Card.Title>
         <Card.Text>{book.author}</Card.Text>
-        {isRented ? buttonIfBookIsRented : buttonIfIsOnBag}
+        {AuthorizedFunction(["locator"])
+          ? isRented
+            ? buttonIfBookIsRented
+            : buttonIfIsOnBag
+          : null}
       </Card.Body>
     </Card>
   );
