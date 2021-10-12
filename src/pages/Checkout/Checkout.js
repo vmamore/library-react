@@ -14,7 +14,11 @@ export function Checkout() {
 
   function createRental() {
     createBookRental(bookBag).then(
-      (c) => {console.log(c); setBookBag([])},
+      (c) => {
+        console.log(c);
+        setBookBag([]);
+        goToHome();
+      },
       (err) => console.log(err)
     );
   }
