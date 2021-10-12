@@ -14,5 +14,5 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ## 🔹 Todo 
 - Librarian view
     - [X] Return rented books
-    - [ ] Register new book
-    - [ ] See all rents
+    - [X] Register new book
+    - [X] See all rents

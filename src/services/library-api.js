@@ -20,7 +20,12 @@ export async function createBookRental(books) {
     locatorId: profile.attributes.library_id[0]
   };
 
-  return await axios.post(url, payload);
+  return await axios.post(url, payload, {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': 'Bearer ' + KeycloakService.keycloak.token
+    }
+  });
 }
 
 export async function fetchAllRentsFromLocator() {
