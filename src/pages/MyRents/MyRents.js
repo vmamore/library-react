@@ -42,41 +42,50 @@ export function MyRents() {
 
   if (bookRentals.state === "idle") return <h1>Loading...</h1>;
 
+  var bookRentalsComponent = bookRentals.data.map(bookRental => (
+    <Accordion defaultActiveKey="0" flush key={bookRental.id}>
+      <Accordion.Item eventKey="0">
+        <Accordion.Header>
+          <Badge style={{ marginRight: "35px" }} pill bg="success">
+            {bookRental.status}
+          </Badge>
+          <Badge style={{ marginRight: "35px" }} pill bg="primary">
+            Rented Day: {convertDate(bookRental.rentedDay)}
+          </Badge>
+          <Badge style={{ marginRight: "35px" }} pill bg="warning">
+            Day to Return: {convertDate(bookRental.dayToReturn)}
+          </Badge>
+          {bookRental.returnedDay && (
+            <Badge style={{ marginRight: "35px" }} pill bg="info">
+              Returned Day: {convertDate(bookRental.returnedDay)}
+            </Badge>
+          )}
+        </Accordion.Header>
+        <Accordion.Body>
+          <ListGroup variant="flush">
+            <h4>Rented Books</h4>
+            {bookRental.books.map((book, index) => (
+              <>
+                <ListGroup.Item eventKey={index}>
+                  <BsBook /> <b>{book.title} </b>
+                  <Badge pill bg="secondary">
+                    {book.author}
+                  </Badge>
+                </ListGroup.Item>
+              </>
+            ))}
+          </ListGroup>
+        </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>)
+  );
+
   return (
     <>
       <h1>
         My Rentals <BsFillBagFill />
       </h1>
-      <Accordion defaultActiveKey="0" flush>
-        <Accordion.Item eventKey="0">
-          <Accordion.Header>
-            <Badge style={{ marginRight: "35px" }} pill bg="success">
-              {bookRentals.data.status}
-            </Badge>
-            <Badge style={{ marginRight: "35px" }} pill bg="primary">
-              Rented Day: {convertDate(bookRentals.data.rentedDay)}
-            </Badge>
-            <Badge style={{ marginRight: "35px" }} pill bg="warning">
-              Day to Return: {convertDate(bookRentals.data.dayToReturn)}
-            </Badge>
-          </Accordion.Header>
-          <Accordion.Body>
-            <ListGroup variant="flush">
-              <h4>Rented Books</h4>
-              {bookRentals.data.books.map((book, index) => (
-                <>
-                  <ListGroup.Item eventKey={index}>
-                    <BsBook /> <b>{book.title} </b>
-                    <Badge pill bg="secondary">
-                      {book.author}
-                    </Badge>
-                  </ListGroup.Item>
-                </>
-              ))}
-            </ListGroup>
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
+      {bookRentalsComponent}
       <hr />
       <Row>
         <Col md={4}>
