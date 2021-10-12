@@ -7,10 +7,11 @@ import {
   Container,
 } from "react-bootstrap";
 import { BookBag } from "../BookBag/BookBag";
-import { BsSearch, BsCollection, BsPlusCircle } from "react-icons/bs";
+import { BsSearch, BsCollection, BsPlusCircle, BsFillDoorOpenFill } from "react-icons/bs";
 import { useHistory } from "react-router";
 import { useState } from "react";
 import { BookRegistration } from '../BookRegistration/BookRegistration';
+import KeycloackService from '../../keycloak';
 import AuthorizedFunction from "../../utils/AuthorizedFunction";
 
 export function BookSearch({
@@ -28,6 +29,10 @@ export function BookSearch({
 
   function goToAllRentals() {
     history.push("/all-rentals");
+  }
+
+  function logOut() {
+    KeycloackService.keycloak.logout();
   }
 
   return (
@@ -88,6 +93,13 @@ export function BookSearch({
               </Button>
             </Nav>
           )}
+          <Nav>
+            <Button
+              variant="outline-dark"
+              onClick={logOut}>
+              <BsFillDoorOpenFill />
+            </Button>
+          </Nav>
         </Container>
       </Navbar>
       <BookRegistration
