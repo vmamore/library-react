@@ -13,8 +13,8 @@ const keycloak = Keycloak({
   clientId: 'library-api'
 });
 
-const KeycloackService = {
+const KeycloakService = {
   keycloak,
   initOptions
 }
-export default KeycloackService;
+export default KeycloakService;

@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { ReactKeycloakProvider } from "@react-keycloak/web";
-import KeycloackService from "./keycloak";
+import KeycloakService from "./keycloak";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const eventLogger = (event, error) => {
@@ -16,10 +16,10 @@ const tokenLogger = (tokens) => {
 ReactDOM.render(
   <React.StrictMode>
     <ReactKeycloakProvider
-      authClient={KeycloackService.keycloak}
+      authClient={KeycloakService.keycloak}
       onEvent={eventLogger}
       onTokens={tokenLogger}
-      initOptions={KeycloackService.initOptions}
+      initOptions={KeycloakService.initOptions}
     >
       <App />
     </ReactKeycloakProvider>

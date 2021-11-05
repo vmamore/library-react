@@ -11,7 +11,7 @@ import { BsSearch, BsCollection, BsPlusCircle, BsFillDoorOpenFill } from "react-
 import { useHistory } from "react-router";
 import { useState } from "react";
 import { BookRegistration } from '../BookRegistration/BookRegistration';
-import KeycloackService from '../../keycloak';
+import KeycloakService from '../../keycloak';
 import AuthorizedFunction from "../../utils/AuthorizedFunction";
 
 export function BookSearch({
@@ -32,7 +32,7 @@ export function BookSearch({
   }
 
   function logOut() {
-    KeycloackService.keycloak.logout();
+    KeycloakService.keycloak.logout();
   }
 
   return (

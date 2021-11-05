@@ -1,7 +1,7 @@
-import KeycloackService from '../keycloak';
+import KeycloakService from '../keycloak';
 
 export default function AuthorizedFunction(roles) {
-    const keycloak = KeycloackService.keycloak
+    const keycloak = KeycloakService.keycloak
     const isAuthorized = () => {
         if (keycloak && keycloak.authenticated && roles) {
             return roles.some(r => {
