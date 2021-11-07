@@ -4,7 +4,6 @@ import KeycloakService from "../keycloak"
 export async function fetchAllBooks(page, title) {
   if(!page) page = 1
   const url = `${process.env.REACT_APP_LIBRARY_API}/rentals/books/all?page=${page}&title=${title}`;
-  console.log('token', KeycloakService.keycloak)
   return await axios.get(url, {
     headers: {
       'Access-Control-Allow-Origin': '*',

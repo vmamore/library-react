@@ -42,7 +42,7 @@ export function MyRents() {
 
   if (bookRentals.state === "idle") return <h1>Loading...</h1>;
 
-  var bookRentalsComponent = bookRentals.data.map(bookRental => (
+  var bookRentalsComponent = bookRentals.data ? (bookRentals.data.map(bookRental => (
     <Accordion defaultActiveKey="0" flush key={bookRental.id}>
       <Accordion.Item eventKey="0">
         <Accordion.Header>
@@ -78,7 +78,7 @@ export function MyRents() {
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>)
-  );
+  )) : <h2>Your rentals history is empty. Let's change this?</h2>;
 
   return (
     <>

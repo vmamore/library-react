@@ -86,7 +86,6 @@ export function BookSearch({
 
               <Button
                 variant="outline-primary"
-                style={{ marginRight: "15px" }}
                 onClick={() => setModalShow(true)}
               >
                 <BsPlusCircle /> Register new Book
@@ -95,6 +94,7 @@ export function BookSearch({
           )}
           <Nav>
             <Button
+              style={{ marginLeft: "15px" }}
               variant="outline-dark"
               onClick={logOut}>
               <BsFillDoorOpenFill />

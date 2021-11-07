@@ -45,15 +45,15 @@ export function AllRentals() {
 
   function bookRentalReturned(bookRentalId) {
     returnBookRental(bookRentalId)
-      .then((response) => {
-        console.log(response);
+      .then(response => {
+        history.push("/all-rentals");
       })
       .catch((err) => console.log(err));
   }
 
   if (bookRentals.state === "idle") return <h1>Loading...</h1>;
 
-  var bookRentalsComponent = bookRentals.data.map(bookRental => (
+  var bookRentalsComponent = bookRentals.data ? (bookRentals.data.map(bookRental => (
     <Accordion defaultActiveKey="0" flush key={bookRental.id}>
       <Accordion.Item eventKey="0">
         <Accordion.Header>
@@ -102,7 +102,7 @@ export function AllRentals() {
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>)
-  );
+  )) : <h2>There aren't rentals yet.</h2>;
 
   return (
     <>
