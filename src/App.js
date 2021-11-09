@@ -1,21 +1,30 @@
-import { Container } from "react-bootstrap";
 import { BrowserRouter, Route } from "react-router-dom";
+import { PrivateRoute } from './utils/PrivateRoute';
 import { AllRentals } from "./pages/AllRentals/AllRentals";
 import { Checkout } from "./pages/Checkout/Checkout";
+import { Catalog } from "./pages/Catalog/Catalog";
 import { Home } from "./pages/Home/Home";
 import { MyRents } from "./pages/MyRents/MyRents";
 
-function App() {
+import { useKeycloak } from '@react-keycloak/web'
+import LoginPage from "./pages/Login/Login";
+
+export function AppRouter() {
+
+  const { initialized } = useKeycloak()
+
+  if (!initialized) {
+    return <div>Loading...</div>
+  }
+
   return (
-    <Container className="p-3">
       <BrowserRouter>
-        <Route path="/checkout" exact component={Checkout} />
-        <Route path="/my-rents" exact component={MyRents} />
-        <Route path="/all-rentals" exact component={AllRentals} />
+        <PrivateRoute path="/checkout" exact component={Checkout} />
+        <PrivateRoute path="/my-rents" exact component={MyRents} />
+        <PrivateRoute path="/all-rentals" exact component={AllRentals} />
+        <PrivateRoute path="/catalog" exact component={Catalog} />
+        <Route path="/login" exact component={LoginPage} />
         <Route path="/" exact component={Home} />
       </BrowserRouter>
-    </Container>
   );
 }
-
-export default App;
