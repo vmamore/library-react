@@ -80,3 +80,17 @@ export async function createBook(book) {
     }
   });
 }
+
+export async function createLocator(locator) {
+  const url = `${process.env.REACT_APP_LIBRARY_API}/locators`;
+  const payload = {
+    ...locator
+  };
+
+  return await axios.post(url, payload, {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': 'Bearer ' + KeycloakService.keycloak.token
+    }
+  });
+}
