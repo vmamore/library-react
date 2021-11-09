@@ -1,5 +1,5 @@
 import { useLocalStorageState } from "../../utils/LocalStorageHook";
-import { Button, ListGroup, Badge, Image, Row, Col } from "react-bootstrap";
+import { Button, ListGroup, Badge, Image, Row, Col, Container } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { createBookRental } from "../../services/library-api";
 import { BsPlus, BsCheck } from "react-icons/bs";
@@ -25,7 +25,7 @@ export function Checkout() {
   if (!bookBag) return <p>Empty Bag</p>;
 
   return (
-    <>
+    <Container className="p-3">
       <h3>Checkout ({bookBag.length} items)</h3>
       <ListGroup variant="flush" class="mb-4">
         {bookBag.map((book, index) => (
@@ -54,6 +54,6 @@ export function Checkout() {
           </Button>
         </Col>
       </Row>
-    </>
+      </Container>
   );
 }

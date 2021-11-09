@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Accordion, ListGroup, Badge, Row, Col, Button } from "react-bootstrap";
+import { Accordion, ListGroup, Badge, Row, Col, Button, Container } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { fetchAllRents, returnBookRental } from "../../services/library-api";
 import {
@@ -105,7 +105,7 @@ export function AllRentals() {
   )) : <h2>There aren't rentals yet.</h2>;
 
   return (
-    <>
+    <Container className="p-3">
       <h1>
         All Rentals <BsFillBagFill />
       </h1>
@@ -123,6 +123,6 @@ export function AllRentals() {
           </Button>
         </Col>
       </Row>
-    </>
+    </Container>
   );
 }

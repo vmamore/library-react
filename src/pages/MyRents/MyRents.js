@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Accordion, ListGroup, Badge, Row, Col, Button } from "react-bootstrap";
+import { Accordion, ListGroup, Badge, Row, Col, Button,Container } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { fetchAllRentsFromLocator } from "../../services/library-api";
 import { BsBook, BsFillBagFill } from "react-icons/bs";
@@ -37,7 +37,7 @@ export function MyRents() {
   }
 
   function goToCatalog() {
-    history.push("/");
+    history.push("/catalog");
   }
 
   if (bookRentals.state === "idle") return <h1>Loading...</h1>;
@@ -81,7 +81,7 @@ export function MyRents() {
   )) : <h2>Your rentals history is empty. Let's change this?</h2>;
 
   return (
-    <>
+    <Container className="p-3">
       <h1>
         My Rentals <BsFillBagFill />
       </h1>
@@ -99,6 +99,6 @@ export function MyRents() {
           </Button>
         </Col>
       </Row>
-    </>
+    </Container>
   );
 }
