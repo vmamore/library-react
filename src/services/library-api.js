@@ -82,6 +82,8 @@ export async function createBook(book) {
 }
 
 export async function createLocator(locator) {
+  console.log('locator', locator)
+  return;
   const url = `${process.env.REACT_APP_LIBRARY_API}/locators`;
   const payload = {
     ...locator
@@ -90,7 +92,6 @@ export async function createLocator(locator) {
   return await axios.post(url, payload, {
     headers: {
       'Access-Control-Allow-Origin': '*',
-      'Authorization': 'Bearer ' + KeycloakService.keycloak.token
     }
   });
 }

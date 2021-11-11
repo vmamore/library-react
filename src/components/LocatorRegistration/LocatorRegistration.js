@@ -8,6 +8,8 @@ export function LocatorRegistration(props) {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
   const [cpf, setCpf] = useState(null);
+  const [username, setUsername] = useState(null);
+  const [email, setEmail] = useState(null);
   const [street, setStreet] = useState(null);
   const [city, setCity] = useState(null);
   const [number, setNumber] = useState(null);
@@ -21,6 +23,8 @@ export function LocatorRegistration(props) {
       firstName,
       lastName,
       cpf,
+      username,
+      email,
       street,
       city,
       number,
@@ -78,6 +82,33 @@ export function LocatorRegistration(props) {
                   value={cpf}
                   type="text"
                   placeholder="CPF"
+                  required
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col>
+              <Form.Group className="mb-3" controlId="formBasicUsername">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                  onChange={(e) => onChange(e, setUsername)}
+                  value={username}
+                  type="text"
+                  placeholder="Username"
+                  required
+                />
+              </Form.Group>
+            </Col>
+            <Col xs={8}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  onChange={(e) => onChange(e, setEmail)}
+                  value={email}
+                  type="text"
+                  placeholder="Email"
                   required
                 />
               </Form.Group>
