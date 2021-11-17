@@ -6,6 +6,7 @@ import { createLocator } from "../../services/library-api";
 export function LocatorRegistration(props) {
   const history = useHistory();
   const [firstName, setFirstName] = useState(null);
+  const [password, setPassword] = useState(null);
   const [lastName, setLastName] = useState(null);
   const [cpf, setCpf] = useState(null);
   const [username, setUsername] = useState(null);
@@ -30,6 +31,7 @@ export function LocatorRegistration(props) {
       number,
       district,
       birthDate,
+      password,
     }).then((response) => {
       history.go(0);
       props.onHide();
@@ -89,6 +91,18 @@ export function LocatorRegistration(props) {
           </Row>
 
           <Row>
+            <Col xs={6}>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  onChange={(e) => onChange(e, setEmail)}
+                  value={email}
+                  type="text"
+                  placeholder="Email"
+                  required
+                />
+              </Form.Group>
+            </Col>
             <Col>
               <Form.Group className="mb-3" controlId="formBasicUsername">
                 <Form.Label>Username</Form.Label>
@@ -101,14 +115,14 @@ export function LocatorRegistration(props) {
                 />
               </Form.Group>
             </Col>
-            <Col xs={8}>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email</Form.Label>
+            <Col>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
                 <Form.Control
-                  onChange={(e) => onChange(e, setEmail)}
-                  value={email}
-                  type="text"
-                  placeholder="Email"
+                  onChange={(e) => onChange(e, setPassword)}
+                  value={password}
+                  type="password"
+                  placeholder="Password"
                   required
                 />
               </Form.Group>

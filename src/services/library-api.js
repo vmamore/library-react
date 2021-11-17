@@ -83,7 +83,6 @@ export async function createBook(book) {
 
 export async function createLocator(locator) {
   console.log('locator', locator)
-  return;
   const url = `${process.env.REACT_APP_LIBRARY_API}/locators`;
   const payload = {
     ...locator
