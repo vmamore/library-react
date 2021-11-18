@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Button, Modal, Form, Row, Col } from "react-bootstrap";
+import { Button, Modal, Form, Row, Col, Alert } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { createLocator } from "../../services/library-api";
 
 export function LocatorRegistration(props) {
   const history = useHistory();
+  const [error, setError] = useState("");
   const [firstName, setFirstName] = useState(null);
   const [password, setPassword] = useState(null);
   const [lastName, setLastName] = useState(null);
@@ -32,10 +33,14 @@ export function LocatorRegistration(props) {
       district,
       birthDate,
       password,
-    }).then((response) => {
-      history.go(0);
-      props.onHide();
-    });
+    })
+      .then((response) => {
+        history.go(0);
+        props.onHide();
+      })
+      .catch((error) => {
+        setError(error.response.data.error);
+      });
   }
 
   function onChange(input, setState) {
@@ -49,6 +54,7 @@ export function LocatorRegistration(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
+      {error ? <Alert variant="danger">{error}</Alert> : null}
       <Form onSubmit={createLocatorSubmit}>
         <Modal.Body>
           <Row>
